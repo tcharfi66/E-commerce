@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import ProductCard from "../components/ProductCard"
 import {Grid, Header, Button,Dropdown, Checkbox, Form} from "semantic-ui-react"
 
+
 const categories = [
     {
       key: 'All',
@@ -27,7 +28,11 @@ const categories = [
 
 class ProductCollection extends Component{
 
-
+state = {
+    name: "", 
+    genre: "", 
+    price: ""
+}
     render(){
         return (
             <div>
@@ -45,45 +50,51 @@ class ProductCollection extends Component{
              <Form>
                 <Form.Field>
                 <label>Book Name</label>
-                <input placeholder='Book Name' />
+                <input placeholder='Book Name' onChange={(event) => this.setState({name: event.target.value})}/>
+                
                 </Form.Field>
 
                 <Form.Field>
                 <label>Genre</label>
-                <input placeholder='Genre' />
+                <input placeholder='Genre' onChange={(event) => this.setState({genre: event.target.value})}/>
                 </Form.Field>
 
                 <Form.Field>
                 <label>Price</label>
-                <input placeholder='Price' />
+                <input placeholder='Price' onChange={(event) => this.setState({price: event.target.value})} />
                 </Form.Field>
 
                 <Form.Field>
                 <Checkbox label='I agree to the Terms and Conditions' />
                 </Form.Field>
-                <Button type='submit' onClick={(e) =>
-
+                <Button type='submit' onClick={() =>{
+                    
+                
+                const newProduct = {
+                    name: this.state.name ,
+                    category: this.state.genre,
+                    price: this.state.price
+                }
                 // console.log("Create New Posting for Books")
                 fetch("http://localhost:3000/products",{
                     method: "POST", 
                     headers: {"Content-Type": "application/json"}, 
-                    body: JSON.stringify({
-                        // name: Name ,
-                        // category: Genre,
-                        // price: Price
-                    })
+                    body: JSON.stringify(newProduct)
 
-                })
+                }).then(r => r.json())
+                .then(product => this.props.addProduct(product))
+
+                }   
               }>Submit</Button>
 
-      
+            
             </Form>
           
             
            <Grid columns={3} divided>
                  <Grid.Row>
                  {
-                    this.props.products.map(p => <ProductCard product={p}/>)
+                    this.props.products.map(p => <ProductCard product={p} addToCart={this.props.addToCart}/>)
 
 
                 }

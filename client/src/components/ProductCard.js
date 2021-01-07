@@ -21,8 +21,9 @@ const ProductCard = props =>{
             </Card.Content>
             
 
-           <Button onClick={(e) =>
-                console.log(e.target)
+           <Button onClick={() =>
+                props.addToCart(props.product)
+            
               }> 🛒 </Button>
 
         </Card>

@@ -10,7 +10,7 @@ render(){
         <div>SHOPPING CART 
             
             {
-            this.props.myCart.map(p => <ProductCard product={p}/>) 
+            this.props.myCart.map(p => <ProductCard product={p} />) 
             
             }
 

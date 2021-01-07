@@ -19,11 +19,10 @@ class ProductsPage extends Component{
             
       
     }
-
-    addToCart = (id) => {
-        if(!this.state.selectedProducts.includes(id)){
+    addToCart = (product) => {
+        if(!this.state.selectedProducts.includes(product)){
           this.setState({
-            selectedProducts: [...this.state.selectedProducts, id]
+            selectedProducts: [...this.state.selectedProducts, product]
           })
         }
       }
@@ -34,13 +33,12 @@ class ProductsPage extends Component{
         })
       }
 
-      
 
-    //   fetch(url, {
-    //     method: "POST",
-    //     headers: {"Content-Type": "application/json"},
-    //     body: JSON.stringify(bodyObj)
-    //   }).then(r => r.json())
+      addProduct = (product) => {
+          this.setState({
+              allProducts: [...this.state.allProducts, product]
+          })
+      }
 
 
     render(){
@@ -48,12 +46,13 @@ class ProductsPage extends Component{
             <div> 
 
                 <div>
-                    <ShoppingCart myCart={this.state.selectedProducts}/>
+                    <ShoppingCart myCart={this.state.selectedProducts } />
                 </div>
 
 
                 <div>
-                    <ProductCollection products={this.state.allProducts}/>
+                    <ProductCollection products={this.state.allProducts} addProduct={this.addProduct} addToCart={this.addToCart}/>
+                    
                 </div>
 
 
