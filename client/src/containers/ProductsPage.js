@@ -27,10 +27,21 @@ class ProductsPage extends Component{
         }
       }
     
-      removeFromCart = (id) => {
+      removeFromCart = (product) => {
         this.setState({
-          selectedProducts: [...this.state.selectedProducts.filter(prodId=> prodId !== id)]
+          selectedProducts: [...this.state.selectedProducts.filter(p=> p !== product)]
         })
+      }
+      deleteListing = (product) => {
+        let bookToDelete = [...this.state.allProducts].filter(b => b.id !== product)
+        //removes from backend 
+        fetch(allP + "${id}", {
+            method: "DELETE"
+        }).then(() => this.setState({
+          allProducts: bookToDelete
+        }))
+        //removes from frontend
+        this.removeFromCart(product)
       }
 
 
@@ -46,12 +57,12 @@ class ProductsPage extends Component{
             <div> 
 
                 <div>
-                    <ShoppingCart myCart={this.state.selectedProducts } />
+                    <ShoppingCart myCart={this.state.selectedProducts } deleteListing= {this.deleteListing}  />
                 </div>
 
 
                 <div>
-                    <ProductCollection products={this.state.allProducts} addProduct={this.addProduct} addToCart={this.addToCart}/>
+                    <ProductCollection products={this.state.allProducts} addProduct={this.addProduct} addToCart={this.addToCart} deleteListing= {this.deleteListing} />
                     
                 </div>
 

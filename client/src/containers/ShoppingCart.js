@@ -7,10 +7,11 @@ class ShoppingCart extends Component{
 
 render(){
     return(
-        <div>SHOPPING CART 
+        <div>
+            <h1>SHOPPING CART </h1>
             
             {
-            this.props.myCart.map(p => <ProductCard product={p} />) 
+            this.props.myCart.map(p => <ProductCard product={p} deleteListing= {this.props.deleteListing} />) 
             
             }
 

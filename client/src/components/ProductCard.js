@@ -9,11 +9,11 @@ const ProductCard = props =>{
         <Card>
             <Card.Content>
                 <Card.Header>
-                Book Title: 
+                
                 {props.product.name}
                 </Card.Header>
           
-                Genre: 
+             
                 {props.product.category}
                 <Card.Description>
                 ${props.product.price} 
@@ -21,10 +21,14 @@ const ProductCard = props =>{
             </Card.Content>
             
 
-           <Button onClick={() =>
+           <Button class="ui primary button"  content='Primary' primary onClick={() =>
                 props.addToCart(props.product)
             
-              }> 🛒 </Button>
+              }> Add to Cart </Button>
+
+            <Button class="ui secondary button" content='Secondary' secondary onClick={() =>
+                props.deleteListing(props.product)
+              }> x </Button>
 
         </Card>
 

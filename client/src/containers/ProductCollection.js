@@ -1,6 +1,6 @@
 import React, {Component} from "react"; 
 import ProductCard from "../components/ProductCard"
-import {Grid, Header, Button,Dropdown, Checkbox, Form} from "semantic-ui-react"
+import {Grid, Header, Button,Dropdown, Checkbox, Form, Segment} from "semantic-ui-react"
 
 
 const categories = [
@@ -40,14 +40,15 @@ state = {
 
             <span>
                 Sort by Genre:{'  '}
-                <Dropdown
+                <Dropdown 
                 inline
                 options={categories}
                 defaultValue={categories[0].value}
                 />
             </span>
          </Header> 
-             <Form>
+         <Segment inverted>
+             <Form inverted>
                 <Form.Field>
                 <label>Book Name</label>
                 <input placeholder='Book Name' onChange={(event) => this.setState({name: event.target.value})}/>
@@ -67,7 +68,7 @@ state = {
                 <Form.Field>
                 <Checkbox label='I agree to the Terms and Conditions' />
                 </Form.Field>
-                <Button type='submit' onClick={() =>{
+                <Button type='submit' basic color='blue' onClick={() =>{
                     
                 
                 const newProduct = {
@@ -89,12 +90,13 @@ state = {
 
             
             </Form>
+            </Segment>
           
             
            <Grid columns={3} divided>
                  <Grid.Row>
                  {
-                    this.props.products.map(p => <ProductCard product={p} addToCart={this.props.addToCart}/>)
+                    this.props.products.map(p => <ProductCard product={p} addToCart={this.props.addToCart} deleteListing= {this.props.deleteListing} />)
 
 
                 }
